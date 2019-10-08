@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="utf-8" />
+<title>Inscription</title>
+<link rel="stylesheet" type="text/css"
+	href="../static/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" />
+	
+<link rel="stylesheet" type="text/css" href="../static/css/style.css"
+	th:href="@{/css/style.css}" />
+
+ <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+	
+	
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css"/>
+	<link href="css/business-casual.css" rel="stylesheet"/>
+    <!-- Custom styles for this template -->
+</head>
+<body>
+
+	<header>
+		
+	</header>
+	<nav class="navbar navbar-expand-lg navbar-light bg-faded py-lg-4">
+		<div class="container">
+			<a
+				class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none"
+				href="#">Job search</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarResponsive" aria-controls="navbarResponsive"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav mx-auto">
+					<li class="nav-item px-lg-4"><a
+						class="nav-link text-uppercase text-expanded"
+						th:href="@{/}">Home <span
+							class="sr-only">(current)</span>
+					</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<br/><br/>
+	<section >
+
+
+
+
+
+
+ <div class="bg-faded p-4 my-4" >
+      
+          <div class="row">
+            
+            <div class="form-group col-lg-6">
+              	<form th:action="@{/inscriptionEmploye}" method="get">
+						<div>
+							<label class="text-heading"> Inscription Employé : </label>
+							<button type="submit" class="btn btn-secondary">Employé</button>
+						</div>
+					</form>
+            </div>
+            <div class="form-group col-lg-6">
+            	<form th:action="@{/inscriptionEmployeur}" method="get">
+						<div>
+							<label class="text-heading"> Inscription Employeur : </label>
+							<button type="submit" class="btn btn-secondary">Employeur</button>
+						</div>
+					</form>
+            </div>
+           </div>
+      </div>
+
+
+
+
+
+
+	
+
+					
+	
+	</section>
+	
+	
+	<footer>
+
+	</footer>
+</body>
+</html>

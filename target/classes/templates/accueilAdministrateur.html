@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>Accueil Administrateur</title>
+<link rel="stylesheet" type="text/css"
+	href="../static/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" href="../static/css/style.css"
+	th:href="@{/css/style.css}" />
+
+ <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+	
+	<link href= "https://svn.apache.org/repos/asf/qpid/tags/pre-M1/java/java/management/core/lib/spring/spring.ftl" />
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css"/>
+	<link href="css/business-casual.css" rel="stylesheet"/>
+    <!-- Custom styles for this template -->
+    
+    
+</head>
+<body>
+ 
+		
+		
+		
+		
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-light bg-faded py-lg-4">
+		<div class="container">
+			<a
+				class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none"
+				href="#">Job search</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarResponsive" aria-controls="navbarResponsive"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav mx-auto">
+				<li class="nav-item px-lg-4"><a
+						class="nav-link text-uppercase text-expanded"
+						th:href="@{/accueilAdministrateur}">Accueil
+							<span class="sr-only">(current)</span>
+					</a></li>
+					<li class="nav-item px-lg-4"><a
+						class="nav-link text-uppercase text-expanded"
+						th:href="@{/listAdmin}">gérer les administrateurs
+							<span class="sr-only">(current)</span>
+					</a></li>
+					<li class="nav-item px-lg-4"><a
+						class="nav-link text-uppercase text-expanded"
+						th:href="@{/listPublication}">gérer les publications</a></li>
+					<li class="nav-item px-lg-4"><a
+						class="nav-link text-uppercase text-expanded" th:href="@{/listEmployeur}">gerer les publieurs</a></li>
+						<li class="nav-item px-lg-4"><a
+						class="nav-link text-uppercase text-expanded"
+						th:href="@{/logout}">Logout
+					</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	
+
+
+
+<div class="container" th:if="${test}=='accueil'">
+      <div class="bg-faded p-4 my-4">
+        <hr class="divider"/>
+        <h2 class="text-center text-lg text-uppercase my-0"><strong>Statistiques</strong>
+        </h2>
+        <hr class="divider"/>
+<table border="2">
+<tr>
+<td>Nombre employeur: <span th:text="${nbrEmployeur}"></span></td> 
+</tr>
+<tr>
+<td>Nombre employe: <span th:text="${nbrEmploye}"></span></td> 
+</tr>
+<tr>
+<td>Nombre publication: <span th:text="${nbrPublication}"></span></td> 
+</tr>
+<tr>
+<td>Nombre publication active: <span th:text="${nbrPublicationActive}"></span></td> 
+</tr>
+<tr>
+<td>pourcentage  employe <span th:text="${pourcentageEmploye}"></span></td> 
+</tr>
+</table>
+  
+   </div> </div> 
+      
+      
+      
+      <div class="container" th:if="${test}=='admin'">
+		 
+	<nav class="navbar navbar-expand-lg navbar-light bg-faded py-lg-4" th:if="${erreur3}">
+			<div class="container" >
+		<p class="text-heading"><span th:text="${erreur3}"></span></p> 
+			</div>
+		</nav>		
+			 
+
+<p>
+
+						<a  th:href="@{/ajoutAdminForm}">
+						<button type="submit" class="btn btn-secondary" >ajouter un administrateur</button></a>
+						</p>
+<th:block th:each = "administrateur : ${administrateurs}">
+     <div class="bg-faded p-4 my-4">
+        <hr class="divider"/>
+        <h2 class="text-center text-lg text-uppercase my-0">Administrateur n:<strong><span th:text="${administrateur.id}"></span></strong>
+        </h2>
+        <hr class="divider"/>
+        
+       <div class="row">
+
+					<div class="col-lg-10">
+				 
+						
+						<p>
+							Login :
+							<th:block th:text="${administrateur.login}"></th:block>
+						</p>
+						
+						<p>
+							Pwd :
+							<th:block th:text="${administrateur.password}"></th:block>
+						</p>
+						
+						<p>
+							Priorité :
+							<th:block th:text="${administrateur.priorite}"></th:block>
+						</p>
+							<p>	<a  th:href="@{/deleteAdmin(id=${administrateur.id})}">
+						<button type="submit" class="btn btn-secondary" >supprimer</button></a>
+						<a  th:href="@{/modifAdminForm(id=${administrateur.id})}">
+						<button type="submit" class="btn btn-secondary" >modifier</button></a>
+ </p> 
+					</div>
+				</div>
+
+			</div>
+	</th:block>	 
+
+
+ 
+			</div>
+			 
+
+
+
+<div class="container" th:if="${test}=='publication'">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-faded py-lg-4">
+			<div class="container">
+
+				<div class="collapse navbar-collapse" id="navbarResponsive">
+					<ul class="navbar-nav mx-auto">
+						<li class="nav-item active px-lg-4">
+			 
+    
+     
+     <form th:object="${publication}" method="post" action="/recherchePublication" >
+      <input type="text" class="form-control" name="enregistrer" />
+  
+        
+        </form>
+    
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	 
+     	    
+        <br/>
+
+ 
+
+<th:block th:each = "publication : ${publications}"> 
+<div class="bg-faded p-4 my-4">
+        <hr class="divider"/>
+        <h2 class="text-center text-lg text-uppercase my-0">Publication n:<strong><span th:text="${publication.id}"></span></strong>
+        </h2>
+        <hr class="divider"/> 
+    
+   
+        
+       <div class="row">
+
+					<div class="col-lg-10">
+						
+						<p>
+							Description:
+							<th:block th:text="${publication.description}"></th:block>
+						</p>
+<p>
+							Date:
+							<th:block th:text="${publication.date}"></th:block>
+						</p>
+						<p>
+							Pays:
+							<th:block th:text="${publication.pays}"></th:block>
+						</p>
+<p>
+							IsActive:
+							<th:block th:text="${publication.isactive}"></th:block>
+						</p>
+<p>
+							Competences :
+							<th:block th:each="c:${publication.competences}">
+								<th:block th:text="${c.nom}"></th:block>
+							</th:block>
+						</p> 
+						<p>					<a  th:href="@{/deletePublication(id=${publication.id})}">
+						<button type="submit" class="btn btn-secondary" >supprimer</button></a> </p>
+					</div>
+				</div>
+
+	 <br/>	</div>	 
+	</th:block>	 
+ 
+ 
+ 
+         
+        </div>  
+
+<div class="container" th:if="${test}=='publieur'">
+	<!--  <nav class="navbar navbar-expand-lg navbar-light bg-faded py-lg-4">
+			<div class="container">
+
+				<div class="collapse navbar-collapse" id="navbarResponsive">
+					<ul class="navbar-nav mx-auto">
+						<li class="nav-item active px-lg-4">
+							<form th:action="@{/rechercheEmployeur}" method="get">
+								<input type="text" class="form-control"   />
+							</form>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>	  -->
+        
+        <br/>
+
+ 
+
+<th:block th:each = "employeur : ${employeurs}"> 
+<div class="bg-faded p-4 my-4">
+        <hr class="divider"/>
+        <h2 class="text-center text-lg text-uppercase my-0">Employe n:<strong><span th:text="${employeur.id}"></span></strong>
+        </h2>
+        <hr class="divider"/> 
+        
+       <div class="row">
+
+					<div class="col-lg-10">
+						<p>
+							Secteur :
+							<th:block th:text="${employeur.secteur}"></th:block>
+						</p>
+ <p>
+							Entreprise :
+							<th:block th:text="${employeur.entreprise}"></th:block>
+						</p> 
+<p>
+							Email :
+							<th:block th:text="${employeur.email}"></th:block>
+						</p> 
+						<p>
+							Telephone :
+							<th:block th:text="${employeur.telephone}"></th:block>
+						</p> 
+						<p>
+							Pays :
+							<th:block th:text="${employeur.pays}"></th:block>
+						</p>	
+						<p>
+							Adresse :
+							<th:block th:text="${employeur.adresse}"></th:block>
+						</p>		   
+
+
+	<p>					<a  th:href="@{/deleteEmployeur(id=${employeur.id})}">
+						<button type="submit" class="btn btn-secondary" >supprimer</button></a>
+						  </p>
+					</div>
+				</div>
+
+	 <br/>	</div>	 
+	</th:block>	 
+ 
+ 
+ 
+         
+        </div>  
+        
+     
+ 
+ <footer class="bg-faded text-center py-5">
+      <div class="container">
+        <p class="m-0">Copyright &copy; Job Search</p>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+
+</html>
